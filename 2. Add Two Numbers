@@ -1,0 +1,67 @@
+//You are given two non-empty linked lists representing two non-negative integers.
+//The digits are stored in reverse order, and each of their nodes contains a single digit. 
+//Add the two numbers and return the sum as a linked list.
+//You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        //create new linked list that will be returned at the end of the function
+        ListNode listhead = new ListNode(0);
+        ListNode l3 = listhead;
+
+        //instantiate variable for carryover (i.e. if value is over 10). Will most likely always be 1.
+        int carry = 0;
+
+        //Loop for adding the nodes of both linkedlists
+        while(l1 != null || l2 != null){
+            //If the value in l1 is not null, set l1_val to the value. Otherwise, set to 0.
+            int l1_val = (l1 != null) ? l1.val : 0;
+            //If the value in l1 is not null, set l1_val to the value. Otherwise, set to 0.
+            int l2_val = (l2 != null) ? l2.val : 0;
+
+            //current sum is the current l1 + l2 nodes, as well as any carryover present
+            int current_sum = l1_val + l2_val + carry;
+
+            //update the carryover to see if the sum exceeds 10 (and a 1 must be carried)
+            carry = current_sum / 10;
+
+            //Set the new digit to the sum (minus any potential carryover). i.e. the remainder of the carry variable.
+            int last_digit = current_sum % 10;
+
+            Add a new node to the returned LinkedList and set it to the value of the new digit.
+            ListNode new_node = new ListNode(last_digit);
+            l3.next = new_node;
+
+            //if l1 still has nodes, move to the next digit.
+            if(l1 != null){
+                l1 = l1.next;
+            }
+            //if l2 still has nodes, move to the next digit.
+            if(l2 != null){
+                l2 = l2.next;
+            }
+
+            //move to the next digit in the returned LinkedList.
+            l3 = l3.next;
+        }
+
+        //if, after all nodes are added, there is still a carry, create one last node on the returned linkedlist and set it to the value of carry.
+        if(carry > 0){
+            ListNode new_node = new ListNode(carry);
+            l3.next = new_node;
+            l3 = l3.next;
+        }
+
+        return listhead.next;
+    }
+}
