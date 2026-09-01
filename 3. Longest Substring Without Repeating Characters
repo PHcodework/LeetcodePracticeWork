@@ -1,0 +1,33 @@
+//Given a string s, find the length of the longest substring without duplicate characters.
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+
+        //create two pointers, set both at the beginning
+        int a_pointer = 0; //this pointer will remain at the beginning unless a repeating char is found.
+        int b_pointer = 0; //this pointer will move forward incrementally.
+
+        //max substring length is set to 0 to start
+        int max = 0;
+
+        //create a Hashset to hold all characters of the substring
+        HashSet<Character> set = new HashSet();
+
+        //while loop that cycles through the entirety of the string
+        while(b_pointer < s.length()){
+
+            //if the Hashset doesn't already contain the current char, add it to the Hashset and increase max!
+            if(!set.contains(s.charAt(b_pointer))){
+                set.add(s.charAt(b_pointer));
+                b_pointer++; //move the b_pointer forward
+                max = Math.max(set.size(), max); 
+            }
+            //if the set already contains the letter, it's a repeating letter.
+            //move the pointer at the beginning forward.
+            else{
+                set.remove(s.charAt(a_pointer));
+                a_pointer++;
+            }
+        }
+        return max;
+    }
+}
