@@ -1,0 +1,19 @@
+//Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
+//Compared to the previous previous atttempts, this is a quicker method of finding duplicates.
+class Solution {
+    public boolean containsDuplicate(int[] nums) {
+        //create a hashset of integers.
+        HashSet<Integer> hash = new HashSet<>();
+
+        //cycle through the nums array provided looking for duplicates
+        for(int i=0; i < nums.length; i++){
+            if(hash.contains(nums[i])) //if the current value is already present in hashmap, return true (duplicate!)
+                return true;
+            else
+                hash.add(nums[i]); //if the current value is not already present in hashmap, add it for comparison purposes
+        }    
+        return false; //if no duplicates are found, return false.
+    }
+}
+//this method runs faster than the Arrays.sort method because hashmap.contain tends to operate faster than the sort function.
+//note: would likely not be an effective method with larger datasets, however, using Arrays.sort would likely have the same fate.
