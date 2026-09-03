@@ -1,0 +1,26 @@
+//You are given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+//You may assume that each input would have exactly one solution, and you may not use the same element twice.
+//You can return the answer in any order.
+
+class Solution {
+    public int[] twoSum(int[] nums, int value){
+
+        //create a hashmap to contain the values
+        Map<Integer, Integer> nummap = new HashMap<>();
+
+        //cycle through the provided array
+        for(int i= 0; i < nums.length; i++){
+            //find the difference between the current index's value and the target value
+            int complement = value - nums[i];
+
+            //if the hashmap contains the compliment, return an array containing the complement and value at index i
+            if(nummap.containsKey(complement)){
+                return new int[]{nummap.get(complement), i};
+            }
+
+            //add the current index and value into the hashmap, move forward
+            nummap.put(nums[i], i);
+        }
+        return new int[]{}; //if nothing is found, return an empty array.
+    }
+}
