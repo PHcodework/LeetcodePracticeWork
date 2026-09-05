@@ -1,0 +1,34 @@
+class Solution {
+    public boolean isValidSudoku(char[][] board) {
+
+        //create 2D matrices for rows, cols, and boxes (all are 9x9, the dimensions of a game of sudoku)
+        boolean[][] rows = new boolean[9][9];
+        boolean[][] cols = new boolean[9][9];
+        boolean[][] boxes = new boolean[9][9];
+
+        //cycle through the sudoku board, rows (i) being the outer loop
+        for(int i = 0; i < 9; i++){
+            //inner loop refers to columns (j)
+            for(int j = 0; j < 9; j++){
+                //if the current row and index are NOT blank
+                if(board[i][j] != '.'){
+
+                    //set num to zero-based index (if 1 set to 0, if 2 set to 1, etc.)
+                    int num = board[i][j] - '1';
+                    int boxIndex = (i/3) * 3 + (j/3); //find index of current value in box
+
+                    //if this number is already present in the current row, box, or column, return false.
+                    //the sudoku box is NOT valid.
+                    if(rows[i][num] || cols[j][num] || boxes[boxIndex][num]){
+                        return false;
+                    }
+
+                    //set the current value to TRUE for the current row/column/box in case that number is seen again.
+                    rows[i][num] = cols[j][num] = boxes[boxIndex][num] = true;
+                }
+            }
+        }
+        //if no "false" is flagged, return true. This sudoku board would be valid
+        return true;
+    }
+}
