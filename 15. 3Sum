@@ -1,0 +1,62 @@
+//Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+//Notice that the solution set must not contain duplicate triplets.
+
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+
+        List<List<Integer>> ans = new ArrayList<>(); //create an arraylist to return the naswer
+        int n = nums.length;
+
+        //sort the provided array
+        Arrays.sort(nums);
+
+        //cycle through the array
+        for(int i = 0;i < n - 2; i++){
+            int curr = nums[i];
+            int l = i + 1; //find index right after the current index (value furthest to the left)
+            int r = n - 1; //find index at the end of the array (value furthest to the right)
+
+            //if the value is the same as the value ahead of it, continue
+            if(i != 0 && nums[i] == nums[i - 1]){
+                continue;
+            }
+            
+            //while there is still space between the left and the right
+            while(l < r){
+                //add the current value to the left and right values
+                int sum = curr + nums[l] + nums[r];
+
+                //if sum is zero, add the current, left, and right values to the array
+                if(sum == 0){
+                    ans.add(Arrays.asList(curr,nums[l],nums[r]));
+                    
+                    //increment left index while left is less than right (and nums still has room to proceed), if applicable
+                    while(l < r && nums[l] == nums[l + 1]){
+                        l++;
+                    }
+
+                    //dencrement right index while right is greater than left (and nums still has room to proceed), if applicable
+                    while(r > l && nums[r] == nums[r - 1]){
+                        r--;
+                    }
+
+                    //increment/decrement left and right indices respectively once more
+                    l++;
+                    r--;
+                //if sum != 0
+                } else {
+                    if(sum > 0){
+                        r--; //decrement right index if sum is greater than zero
+                    }
+                    else {
+                        l++; //increment left index if the sum is less than zero
+                    }
+                }
+            }
+            
+        }
+
+        //return the completed list
+        return ans;
+    }
+}
