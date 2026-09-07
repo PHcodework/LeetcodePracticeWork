@@ -1,0 +1,42 @@
+//Given a sorted array of distinct integers and a target value, return the index if the target is found. 
+//If not, return the index where it would be if it were inserted in order.
+//You must write an algorithm with O(log n) runtime complexity.
+
+class Solution {
+    public int searchInsert(int[] nums, int target) {
+       
+       //***Determines the result for an array containing one element
+       if(nums.length == 1){
+
+        //return 1 if the number is at index 1, else return 0. Straightforward
+        if(target > nums[0])
+            return 1;
+        else
+            return 0;
+       }
+
+       //***Determines the result for an array of multiple elements (if target is found)
+        for(int i = 0; i < nums.length; i++){
+            if(nums[i] == target)
+                return i;
+        }
+        
+        //***Determines the result for an array of multiple elements (if target is not found)
+        for(int j = 0; j < nums.length - 1; j++){
+
+            //if the current value is less than the target and the next value is greater than the target
+            if(nums[j] < target){
+                if(nums[j + 1] > target){
+                    return j + 1; //the answer would be the index after the current value!
+                }
+            }
+            //if the target is greater than the final (largest) value, return the length of the array
+            //(i.e. this would be a value at the index after the final value in the array)
+            if(target > nums[nums.length - 1])
+                return nums.length;
+        }
+
+        //if answer could not be found, return 0. Would work in the case of null/empty array
+        return 0;
+    }
+}
