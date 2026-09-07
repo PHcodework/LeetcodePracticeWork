@@ -1,0 +1,27 @@
+//You are given a large integer represented as an integer array digits, where each digits[i] is the ith digit of the integer.
+//The digits are ordered from most significant to least significant in left-to-right order. 
+//The large integer does not contain any leading 0's.
+//Increment the large integer by one and return the resulting array of digits.
+
+class Solution {
+    public int[] plusOne(int[] digits) {
+        //iterate through the array backwards to see if any values + 1 = 10
+        for(int i = digits.length - 1; i >= 0; i--){
+
+            //if no values + 1 = 10, return array as normal with the 1 added
+            //i.e.-- do not add/remove any places!
+            if(digits[i] + 1 != 10){
+                digits[i] += 1;
+                return digits;
+            }
+            digits[i] = 0;
+        }
+
+        //if adding 1 to any of the values would = 10, create new array with an additional spot
+        int[] newDigits = new int[digits.length + 1];
+
+        //set the first place as 1.
+        newDigits[0] = 1;
+        return newDigits;
+    }
+}
