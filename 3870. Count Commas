@@ -1,0 +1,19 @@
+//You are given an integer n.
+//Return the total number of commas used when writing all integers from [1, n] (inclusive) in standard number formatting.
+//In standard formatting:
+      //A comma is inserted after every three digits from the right.
+      //Numbers with fewer than 4 digits contain no commas.
+class Solution {
+    public int countCommas(int n)
+     {
+        int count=0; //initialize comma count
+
+        //if n is less than 999, no commas are used. return zero.
+        if(n<999){
+            return 0;
+        }
+
+        //each digit after 999 is a comma used, subtract 999 from the initial number to find the number of commas used.
+        return n-999; 
+    }
+}
