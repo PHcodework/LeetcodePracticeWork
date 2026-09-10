@@ -1,0 +1,37 @@
+//Given two binary strings a and b, return their sum as a binary string.
+class Solution 
+{
+  public String addBinary(String a, String b) 
+  {
+    //answer would be a StringBuilder variable to save time
+    StringBuilder ans = new StringBuilder();
+
+    //set carry to 0 for now (carry will serve as the carried value if 1 + 1)
+    int carry = 0;
+
+    //create variables representing the index of the last unreviewed char in each string
+    int alen = a.length() - 1;
+    int blen = b.length() - 1;
+
+    //while a or b isn't fully reviewed, or if there's still a remainder
+    while (alen >= 0 || blen >= 0 || carry == 1) 
+    {
+        //if there is an unreviewed value in a, add it to the carry
+        if(alen >= 0){
+            carry += a.charAt(alen--) - '0';
+        }
+
+        //if there is an unreviewed value in b, add it to the carry
+        if(blen >= 0){
+            carry += b.charAt(blen--) - '0';
+        }
+    
+        //add result to the answer
+        ans.append(carry % 2);
+
+        //divide carry by 2 (either clears or sets to 1)
+        carry /= 2;
+    }
+    return ans.reverse().toString(); //reverse answer, as we've been adding the digits to the back while going through both numbers backwards.
+  }
+}
