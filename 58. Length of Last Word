@@ -1,0 +1,24 @@
+//Given a string s consisting of words and spaces, return the length of the last word in the string.
+//A word is a maximal substring consisting of non-space characters only.
+class Solution {
+    public int lengthOfLastWord(String s) {
+
+        //removes exterior spaces in the event that there are any
+        s = s.trim();
+        int n = s.length() - 1;
+        int count = 0;
+
+        //counts the letters of the last word of the string before either a space or the end of the string is reached
+        //(working backwards is fine in this instance, as order doesn't matter when counting the digits.
+        for (int i = n; i >= 0; i--){
+            if(s.charAt(i) != ' '){
+                count++;
+            }
+            //if a space is detected, break!
+            else{
+                break;
+            }
+        }
+        return count; //return the length of the last word
+    }
+}
