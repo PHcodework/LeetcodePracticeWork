@@ -1,0 +1,17 @@
+//Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+class Solution {
+    public int strStr(String haystack, String needle) {
+        //find the length of the "needle" string
+        int nlength = needle.length();
+
+        //cycle/"look" throught the haystack string
+        for(int i = 0; i <= haystack.length() - nlength; i++){
+            //if the full "needle" string begins at this index, return this index (first occurrence!)
+            if(haystack.substring(i, i + nlength).equals(needle)){
+                return i;
+            }
+        }
+        //if the needle is not found, return -1.
+        return -1;
+    }
+}
