@@ -1,0 +1,35 @@
+//You are given two integer arrays nums1 and nums2, sorted in non-decreasing order
+//You are also given two integers m and n, representing the number of elements in nums1 and nums2 respectively.
+//Merge nums1 and nums2 into a single array sorted in non-decreasing order.
+//The final sorted array should not be returned by the function, but instead be stored inside the array nums1. 
+//To accommodate this, nums1 has a length of m + n, where the first m elements denote the elements that should be merged
+    //and the last n elements are set to 0 and should be ignored. 
+//nums2 has a length of n.
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int i = m - 1; //value that represents the index of the last element to be merged
+        int j = n - 1; //value that represents the index of the last element to be ignored and set to 0
+        int k = m + n - 1; //total length of the values to be merged
+
+        //while there are still values to be sorted and ignored, parse!
+        while(i >= 0 && j >= 0){
+            //merge values assigned to be merged (starting from the right)
+            if(nums1[i] > nums2[j]){
+                nums1[k] = nums1[i];
+                i--;
+            } //merge any values at j from the right 
+            else{
+                nums1[k] = nums2[j];
+                j--;
+            }
+            k--; //decrement through the array
+        }
+
+        //while there are still numbers to ignore and set as zero, ignore and set to zero.
+        while(j >= 0){
+            nums1[k] = nums2[j];
+            j--;
+            k--;
+        }
+    }
+}
