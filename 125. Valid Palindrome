@@ -1,0 +1,38 @@
+//A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. 
+//Alphanumeric characters include letters and numbers.
+//Given a string s, return true if it is a palindrome, or false otherwise.
+class Solution {
+    public boolean isPalindrome(String s) {
+
+        //set index for the left and right of the string
+        int left = 0;
+        int right = s.length() - 1;
+
+        //while the string has not yet been fully parsed, iterate through it!
+        while(left < right){
+            //if the current character at the left is not a letter or a digit, skip past it without checking.
+            //(this saves time!)
+            if(!Character.isLetterOrDigit(s.charAt(left)) ){
+                left++;
+                continue;
+            }
+            //if the current character at the right is not a letter or a digit, skip past it without checking.
+            //(this saves time!)
+            if( !Character.isLetterOrDigit(s.charAt(right)) ){
+                right--;
+                continue;
+            }  
+            //if the characters to the left and right have not yet been skipped,compare the left to right
+            //if the string is a palindrome, they should match!
+            if(Character.toLowerCase(s.charAt(left)) != Character.toLowerCase(s.charAt(right))){
+                return false; //in any case where they don't match, return false.
+            }
+            //update indexes if they have not yet been updated already (via the skips above)
+            left++;
+            right--;
+
+        } 
+        //if no comparisons returned false, return true!! This string is a palindrome
+        return true;  
+    }
+}
