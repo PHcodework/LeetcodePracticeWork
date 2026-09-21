@@ -1,0 +1,33 @@
+//Write a function to find the longest common prefix string amongst an array of strings.
+//If there is no common prefix, return an empty string "".
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        //if the array of strings is either null or empty, there are no prefixes to work with.
+        if(strs == null || strs.length == 0){
+            return "";
+        }
+        //create a "template" based off of the first string in the array
+        //(this will be compared to each string in the array to find a common prefix amongst them)
+        String prefix = strs[0];
+        int preLen = prefix.length();
+
+        //compare the tempalte to each string in the array
+        for(int i = 1; i < strs.length; i++){
+            String s = strs[i];
+
+            //while the prefix does not match the current string's first n letters, subtract letters from the prefix!
+            //note-- "n" being the length of the prefix.
+            while(preLen > s.length() || !prefix.equals(s.substring(0, preLen))){
+                preLen--;
+                //if the prefix had to be shortened to 0 to be "found" in the current word, there is no longest prefix.
+                if(preLen == 0){
+                    return "";
+                }
+                //change the prefix to the new adjusted prefix (if any change has been made)
+                prefix = prefix.substring(0, preLen);
+            }
+        }
+        //return the shortest common prefix.
+        return prefix;
+    }
+}
