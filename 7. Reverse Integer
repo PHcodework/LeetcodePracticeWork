@@ -1,0 +1,28 @@
+//Given a signed 32-bit integer x, return x with its digits reversed. 
+//If reversing x causes the value to go outside the signed 32-bit integer range [-231, 231 - 1], then return 0.
+
+//Assume the environment does not allow you to store 64-bit integers (signed or unsigned).
+class Solution {
+    public int reverse(int x) {
+        //create a temp variable to store the reverse value
+        long temp = 0;
+
+        //while there are still digits of x, add onto temp
+        while(x != 0){
+
+            int digit = x % 10; //separate the last digit of x to add onto temp
+            temp = temp * 10 + digit; //add digit to temp
+            x = x /10; //truncate the last digit of x
+        }
+
+        //"if reversing x causes the value to go outside the signed 32-bit integer range, return 0"
+        //check to see if reversing x causes the value to go outside the signed range
+        if (temp > Integer.MAX_VALUE || temp < Integer.MIN_VALUE) {
+            return 0; //return 0 if so
+        }
+
+        //return temp as the reversed int!
+        return (int)temp;
+        
+    }
+}
