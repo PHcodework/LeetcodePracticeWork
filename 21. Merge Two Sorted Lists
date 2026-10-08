@@ -1,0 +1,40 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+ //You are given the heads of two sorted linked lists list1 and list2.
+//Merge the two lists into one sorted list. 
+//The list should be made by splicing together the nodes of the first two lists.
+//Return the head of the merged linked list.
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        //if both lists are not null, proceed
+        if(list1!=null && list2!=null){
+            //if the current list1 node is less than list2 node, merge the two starting with list1
+            if(list1.val<list2.val){
+                list1.next=mergeTwoLists(list1.next,list2);
+                return list1; //return list1
+            }
+            //if the current list1 node is greater than the list2 node, merge the two starting with list2
+            else{
+                list2.next=mergeTwoLists(list1,list2.next);
+                return list2; //return list2
+            }
+        }
+
+        //if list1 is null, return list2.
+        //if list1 AND list2 are both null, it does not matter if it returns null
+            //null is the only thing it CAN return at this point
+        if(list1==null)
+            return list2;
+
+        //if list2 is null, return list1.
+        return list1;
+    }
+}
