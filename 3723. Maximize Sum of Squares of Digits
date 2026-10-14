@@ -1,0 +1,32 @@
+//You are given two positive integers num and sum.
+//A positive integer n is good if it satisfies both of the following:
+    //The number of digits in n is exactly num.
+    //The sum of digits in n is exactly sum.
+//The score of a good integer n is the sum of the squares of digits in n.
+//Return a string denoting the good integer n that achieves the maximum score. 
+//If there are multiple possible integers, return the maximum ​​​​​​​one. If no such integer exists, return an empty string.
+class Solution {
+    public String maxSumOfSquares(int num, int sum) {
+        //if the sum is greater than 9 * sum, the required sum is impossible. Return null.
+        if (sum > 9L * num){
+            return "";
+        }
+        int q = sum / 9; //find the sum / 9 (maximum score)
+        int r = sum % 9; //find the sum % 9 (maximum score)
+        StringBuilder sb = new StringBuilder(num);
+        //add 'q' (sum / 9) nines to the string
+        for (int i = 0; i < q; i++){
+            sb.append('9');
+        }
+        //add r (the remainder of sum / 9) if the answer is greater than zero
+        if (r > 0){
+            sb.append((char)('0' + r));
+        } 
+        //fill the remaining positions with zeros
+        for (int i = q + (r > 0 ? 1 : 0); i < num; i++){
+            sb.append('0');
+        }
+        //return the maximum score (i.e. largest possible number)
+        return sb.toString();  
+    }
+}
