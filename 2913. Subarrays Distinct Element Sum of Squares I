@@ -1,0 +1,26 @@
+//You are given a 0-indexed integer array nums.
+//The distinct count of a subarray of nums is defined as:
+//Let nums[i..j] be a subarray of nums consisting of all the indices from i to j such that 0 <= i <= j < nums.length. 
+//Then the number of distinct values in nums[i..j] is called the distinct count of nums[i..j].
+//Return the sum of the squares of distinct counts of all subarrays of nums.
+//A subarray is a contiguous non-empty sequence of elements within an array.
+class Solution {
+    public int sumCounts(List<Integer> nums) {
+        int n = nums.size(); //find length of the list
+        int sum = 0;
+        //iterate through the array, use i as the starting index of each subarray
+        //create an empty hashset for every i index
+        for(int i = 0; i < n; i++) {
+            Set<Integer> set = new HashSet<>();
+
+            //extend n to the subarray
+            for(int j = i ; j < n; j++) {
+                //add num at "j" index to the i hashmap, increasing the size
+                set.add(nums.get(j));
+                int m = set.size();
+                sum += (m*m); //add the distinct value (squared) to the sum
+            }
+        }
+        return sum;
+    }
+}
