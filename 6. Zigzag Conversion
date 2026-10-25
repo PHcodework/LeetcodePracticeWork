@@ -1,0 +1,50 @@
+//The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this: 
+    //P   A   H   N
+    //A P L S I I G
+    //Y   I   R
+//And then read line by line: "PAHNAPLSIIGYIR"
+//Write the code that will take a string and make this conversion given a number of rows:
+    //string convert(string s, int numRows);
+class Solution {
+    public String convert(String s, int numRows) {
+        //if there's only one row, there's no zig to zag. Return the original string.
+        if(numRows == 1) {
+            return s;
+        }
+
+        //create a stringbuilder to build the final result string.
+        StringBuilder sb = new StringBuilder();
+        
+        //for loop for each row
+        for(int i = 0; i < numRows; i++) {
+            int idx = i;
+            int deltaSouth = 2 * (numRows - 1 -i); // downMove
+            int deltaNorth = 2 * i; // upMove
+            boolean goingSouth = true;
+
+            //while the number of rows is less than the string length, add the character at the current index to the current row
+            while(idx < s.length()) {
+                sb.append(s.charAt(idx));
+                //if we're on row zero, go "down" a row
+                if(i == 0) {
+                    idx += deltaSouth;
+                //if we're on a lower row, go up
+                } else if(i == numRows - 1) {
+                    idx += deltaNorth;
+                } else {
+                    //if going south, move down
+                    if(goingSouth) {
+                        idx += deltaSouth;
+                    //otherwise, move up
+                    } else {
+                        idx += deltaNorth;
+                    }
+                }
+                //change going south to false, move upwards
+                goingSouth = !goingSouth;
+            }
+        }
+        //return the completed string
+        return sb.toString();
+    }
+}
