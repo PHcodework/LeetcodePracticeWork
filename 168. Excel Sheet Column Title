@@ -1,0 +1,15 @@
+//Given an integer columnNumber, return its corresponding column title as it appears in an Excel sheet.
+class Solution {
+    public String convertToTitle(int columnNumber) {
+        //use stringbuilder to save time/space
+        StringBuilder result = new StringBuilder();
+        
+        //while there is still a column number to read, proceed
+        while (columnNumber > 0) {
+            columnNumber--; //decrement column number and append the alphabetized result to the full string
+            result.append((char) (columnNumber % 26 + 'A')); //note: this will build the string in REVERSE.
+            columnNumber /= 26; //remove current digit, move onto another  (if applicable)
+        }
+        return result.reverse().toString(); //reverse string to show it in the correct order
+    }
+}
